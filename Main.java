@@ -5,9 +5,7 @@ public class Main {
     }
 
     private void go(){
-
         new JCTrade().controller();
-
     }
 
 }
