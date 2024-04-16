@@ -6,7 +6,7 @@ public class CreateTab extends View  {
 
     JTextField addTextFieldName;
     JTextField addTextFieldAge;
-    public JPanel makeCreateTab(){
+    public JPanel makeTab(){
 
         jPanel = new JPanel();
         jPanel.setLayout(new GridLayout(3,2));
@@ -25,10 +25,10 @@ public class CreateTab extends View  {
 
 
     public void setCreateButtonActionListener(ActionListener al) {
-
         createButton.addActionListener(al);
-
     }
+
+    public void viewController() {}
 
 }
 

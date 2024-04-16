@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 public class DeleteTab extends View {
 
-    private JPanel makeDeleteTab(){
+    public JPanel makeTab(){
 
         jPanel = new JPanel();
         jList = new JList<String>(listModel);
@@ -18,18 +18,11 @@ public class DeleteTab extends View {
     }
 
 
-    public void setListSelectionListener(ListSelectionListener sl) {
+    public void setListSelectionListener(ListSelectionListener sl) { updateList.addListSelectionListener(sl); }
 
-        updateList.addListSelectionListener(sl);
+    public void setDeleteButtonActionListener(ActionListener al) { deleteButton.addActionListener(al); }
 
-    }
-
-
-    public void setDeleteButtonActionListener(ActionListener al) {
-
-        deleteButton.addActionListener(al);
-
-    }
+    public void viewController() {}
 
 }
 

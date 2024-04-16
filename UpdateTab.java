@@ -6,7 +6,7 @@ public class UpdateTab extends View {
 
     JTextField updateTextFieldName;
     JTextField updateTextFieldAge;
-    private JPanel makeUpdateTab() {
+    public JPanel makeTab() {
 
         jPanel = new JPanel();
         updateList = new JList<String>(listModel);
@@ -32,10 +32,8 @@ public class UpdateTab extends View {
     }
 
 
-    public void setUpdateButtonActionListener(ActionListener al) {
+    public void setUpdateButtonActionListener(ActionListener al) { updateButton.addActionListener(al); }
 
-        updateButton.addActionListener(al);
-
-    }
+    public void viewController() {}
 
 }

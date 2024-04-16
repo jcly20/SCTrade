@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class JCTrade {
 
     View view;
+    UpdateTab updateTab;
+    CreateTab createTab;
     Model model;
 
     class ChangeTabChangeListener implements ChangeListener {
@@ -38,8 +40,8 @@ public class JCTrade {
                     view.id[0] = Integer.parseInt(words[0]);
                     String name = words[1];
                     int age = Integer.parseInt(words[2]);
-                    view.updateTextFieldName.setText(name);
-                    view.updateTextFieldAge.setText(String.valueOf(age));
+                    updateTab.updateTextFieldName.setText(name);
+                    updateTab.updateTextFieldAge.setText(String.valueOf(age));
                     view.updateButton.setEnabled(true);
                 }
             }
@@ -51,8 +53,8 @@ public class JCTrade {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (view.id[0] != -1) {
-                String name = view.updateTextFieldName.getText();
-                int age = Integer.parseInt(view.updateTextFieldAge.getText());
+                String name = updateTab.updateTextFieldName.getText();
+                int age = Integer.parseInt(updateTab.updateTextFieldAge.getText());
                 model.updateRecord(view.id[0], name, age);
             }
         }
@@ -76,9 +78,9 @@ public class JCTrade {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            String name = view.addTextFieldName.getText();
+            String name = createTab.addTextFieldName.getText();
             int age = -1;
-            try {age = Integer.parseInt(view.addTextFieldAge.getText());} catch(NumberFormatException nfe) {}
+            try {age = Integer.parseInt(createTab.addTextFieldAge.getText());} catch(NumberFormatException nfe) {}
             if (!name.isEmpty() && !(age == -1)) {
                 model.createRecord(name, age);
             }
@@ -92,10 +94,10 @@ public class JCTrade {
         model = new Model();
         model.model();
 
-        view = new View();
-        view.view();
+        ViewController viewController = new ViewController();
+        viewController.viewController();
 
-        view.setChangeTabChangeLister(new ChangeTabChangeListener());
+        viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
         view.updateList.addListSelectionListener(new UpdateListSelectionListener());
         view.updateButton.addActionListener(new UpdateButtonActionListener());
         view.deleteButton.addActionListener(new DeleteButtonActionListener());
