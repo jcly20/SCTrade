@@ -3,12 +3,18 @@ import javax.swing.event.ChangeListener;
 
 public class ViewController extends View {
 
+    public JPanel makeTab() {return jPanel;}
+
     CreateTab createTab = new CreateTab();
     ReadTab readTab = new ReadTab();
     UpdateTab updateTab = new UpdateTab();
     DeleteTab deleteTab = new DeleteTab();
 
-    public JPanel makeTab() {return jPanel;}
+    public ViewController() {
+
+        viewController();
+
+    }
 
     public void viewController() {
 

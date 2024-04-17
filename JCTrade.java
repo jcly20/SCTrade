@@ -95,7 +95,6 @@ public class JCTrade {
         model.model();
 
         ViewController viewController = new ViewController();
-        viewController.viewController();
 
         viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
         view.updateList.addListSelectionListener(new UpdateListSelectionListener());
