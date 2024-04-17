@@ -11,7 +11,7 @@ public abstract class View {
 //    UpdateTab updateTab = new UpdateTab();
 //    DeleteTab deleteTab = new DeleteTab();
 
-    protected DefaultListModel<String> listModel;
+    protected DefaultListModel<String> listModel = new DefaultListModel<String>();
     protected JFrame jFrame;
     protected JPanel jPanel;
     protected JTabbedPane jTabs;
@@ -42,7 +42,6 @@ public abstract class View {
 //        jTabs.addChangeListener(cl);
 //    }
 
-    public abstract void viewController() ;
     public abstract JPanel makeTab() ;
 
 }
