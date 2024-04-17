@@ -18,6 +18,8 @@ public class JCTrade {
         @Override
         public void stateChanged(ChangeEvent e) {
 
+            System.out.println("change tab");
+
             ArrayList<String> arrayList = new ArrayList<String>();
             arrayList = model.selectAll();
 
@@ -32,6 +34,9 @@ public class JCTrade {
     class UpdateListSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
+
+            System.out.println("update selection");
+
             if (!e.getValueIsAdjusting()) {
                 int index = view.updateList.getSelectedIndex();
                 if (index != -1) {
@@ -52,6 +57,9 @@ public class JCTrade {
     class UpdateButtonActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            System.out.println("update button");
+
             if (view.id[0] != -1) {
                 String name = updateTab.updateTextFieldName.getText();
                 int age = Integer.parseInt(updateTab.updateTextFieldAge.getText());
@@ -64,6 +72,9 @@ public class JCTrade {
     class DeleteButtonActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            System.out.println("delete button");
+
             int i = view.jList.getSelectedIndex();
             String s = view.jList.getSelectedValue();
             String[] words = s.trim().split(" ");
@@ -77,6 +88,8 @@ public class JCTrade {
     class CreateButtonActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            System.out.println("create button");
 
             String name = createTab.addTextFieldName.getText();
             int age = -1;
