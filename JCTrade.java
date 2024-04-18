@@ -10,8 +10,11 @@ import java.util.ArrayList;
 public class JCTrade {
 
     View view;
-    UpdateTab updateTab;
-    CreateTab createTab;
+    ViewController viewController;
+    //CreateTab createTab;
+//    ReadTab readTab;
+//    UpdateTab updateTab;
+//    DeleteTab deleteTab;
     Model model;
 
     class ChangeTabChangeListener implements ChangeListener {
@@ -38,15 +41,15 @@ public class JCTrade {
             System.out.println("update selection");
 
             if (!e.getValueIsAdjusting()) {
-                int index = view.updateList.getSelectedIndex();
+                int index = viewController.updateTab.updateList.getSelectedIndex();
                 if (index != -1) {
                     String s = view.listModel.elementAt(index);
                     String[] words = s.trim().split("\\s+");
                     view.id[0] = Integer.parseInt(words[0]);
                     String name = words[1];
                     int age = Integer.parseInt(words[2]);
-                    updateTab.updateTextFieldName.setText(name);
-                    updateTab.updateTextFieldAge.setText(String.valueOf(age));
+                    viewController.updateTab.updateTextFieldName.setText(name);
+                    viewController.updateTab.updateTextFieldAge.setText(String.valueOf(age));
                     view.updateButton.setEnabled(true);
                 }
             }
@@ -61,8 +64,8 @@ public class JCTrade {
             System.out.println("update button");
 
             if (view.id[0] != -1) {
-                String name = updateTab.updateTextFieldName.getText();
-                int age = Integer.parseInt(updateTab.updateTextFieldAge.getText());
+                String name = viewController.updateTab.updateTextFieldName.getText();
+                int age = Integer.parseInt(viewController.updateTab.updateTextFieldAge.getText());
                 model.updateRecord(view.id[0], name, age);
             }
         }
@@ -91,9 +94,9 @@ public class JCTrade {
 
             System.out.println("create button");
 
-            String name = createTab.addTextFieldName.getText();
+            String name = viewController.createTab.addTextFieldName.getText();
             int age = -1;
-            try {age = Integer.parseInt(createTab.addTextFieldAge.getText());} catch(NumberFormatException nfe) {}
+            try {age = Integer.parseInt(viewController.createTab.addTextFieldAge.getText());} catch(NumberFormatException nfe) {}
             if (!name.isEmpty() && !(age == -1)) {
                 model.createRecord(name, age);
             }
@@ -110,10 +113,10 @@ public class JCTrade {
         ViewController viewController = new ViewController();
 
         viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
-        view.updateList.addListSelectionListener(new UpdateListSelectionListener());
-        view.updateButton.addActionListener(new UpdateButtonActionListener());
-        view.deleteButton.addActionListener(new DeleteButtonActionListener());
-        view.createButton.addActionListener(new CreateButtonActionListener());
+        viewController.updateTab.updateList.addListSelectionListener(new UpdateListSelectionListener());
+        viewController.updateTab.updateButton.addActionListener(new UpdateButtonActionListener());
+        viewController.deleteTab.deleteButton.addActionListener(new DeleteButtonActionListener());
+        viewController.createTab.createButton.addActionListener(new CreateButtonActionListener());
 
     }
 

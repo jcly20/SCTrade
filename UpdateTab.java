@@ -9,6 +9,7 @@ public class UpdateTab extends View {
     public JPanel makeTab() {
 
         jPanel = new JPanel();
+        listModel = new DefaultListModel<String>();
         updateList = new JList<String>(listModel);
         updateList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

@@ -11,10 +11,15 @@ public abstract class View {
 //    UpdateTab updateTab = new UpdateTab();
 //    DeleteTab deleteTab = new DeleteTab();
 
-    protected DefaultListModel<String> listModel = new DefaultListModel<String>();
+
+    protected DefaultListModel<String> listModel;
     protected JFrame jFrame;
     protected JPanel jPanel;
     protected JTabbedPane jTabs;
+//    protected CreateTab createTab;
+//    protected ReadTab readTab;
+//    protected UpdateTab updateTab;
+//    protected DeleteTab deleteTab;
     protected JList<String> jList;
     protected JList<String> updateList;
     protected JButton updateButton;

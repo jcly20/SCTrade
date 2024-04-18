@@ -8,10 +8,12 @@ public class ViewController extends View {
     UpdateTab updateTab = new UpdateTab();
     DeleteTab deleteTab = new DeleteTab();
 
+
+
+
     public ViewController() {
 
-        listModel = new DefaultListModel<String>();
-        jList = new JList<String>(listModel);
+        //jList = new JList<String>(listModel);
         jFrame = new JFrame();
         jTabs = new JTabbedPane();
 

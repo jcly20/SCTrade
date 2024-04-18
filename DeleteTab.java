@@ -7,6 +7,7 @@ public class DeleteTab extends View {
     public JPanel makeTab(){
 
         jPanel = new JPanel();
+        listModel = new DefaultListModel<String>();
         jList = new JList<String>(listModel);
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jPanel.add(jList);
