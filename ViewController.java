@@ -3,17 +3,15 @@ import javax.swing.event.ChangeListener;
 
 public class ViewController extends View {
 
+    DefaultListModel<String> listModel = new DefaultListModel<>();
     CreateTab createTab = new CreateTab();
     ReadTab readTab = new ReadTab();
     UpdateTab updateTab = new UpdateTab();
     DeleteTab deleteTab = new DeleteTab();
 
 
-
-
     public ViewController() {
 
-        //jList = new JList<String>(listModel);
         jFrame = new JFrame();
         jTabs = new JTabbedPane();
 
@@ -21,8 +19,6 @@ public class ViewController extends View {
         jTabs.add("READ", readTab.makeTab());
         jTabs.add("UPDATE", updateTab.makeTab());
         jTabs.add("DELETE", deleteTab.makeTab());
-
-
 
 
         jFrame.add(jTabs);

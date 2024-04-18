@@ -9,13 +9,9 @@ import java.util.ArrayList;
 
 public class JCTrade {
 
-    View view;
     ViewController viewController;
-    //CreateTab createTab;
-//    ReadTab readTab;
-//    UpdateTab updateTab;
-//    DeleteTab deleteTab;
     Model model;
+    View view;
 
     class ChangeTabChangeListener implements ChangeListener {
         @Override
@@ -26,9 +22,9 @@ public class JCTrade {
             ArrayList<String> arrayList = new ArrayList<String>();
             arrayList = model.selectAll();
 
-            view.listModel.clear();
+            viewController.listModel.clear();
             for (String s : arrayList) {
-                view.listModel.addElement(s);
+                viewController.listModel.addElement(s);
             }
         }
     }
@@ -43,14 +39,14 @@ public class JCTrade {
             if (!e.getValueIsAdjusting()) {
                 int index = viewController.updateTab.updateList.getSelectedIndex();
                 if (index != -1) {
-                    String s = view.listModel.elementAt(index);
+                    String s = viewController.listModel.elementAt(index);
                     String[] words = s.trim().split("\\s+");
-                    view.id[0] = Integer.parseInt(words[0]);
+                    viewController.id[0] = Integer.parseInt(words[0]);
                     String name = words[1];
                     int age = Integer.parseInt(words[2]);
                     viewController.updateTab.updateTextFieldName.setText(name);
                     viewController.updateTab.updateTextFieldAge.setText(String.valueOf(age));
-                    view.updateButton.setEnabled(true);
+                    viewController.updateButton.setEnabled(true);
                 }
             }
         }
@@ -63,10 +59,10 @@ public class JCTrade {
 
             System.out.println("update button");
 
-            if (view.id[0] != -1) {
+            if (viewController.id[0] != -1) {
                 String name = viewController.updateTab.updateTextFieldName.getText();
                 int age = Integer.parseInt(viewController.updateTab.updateTextFieldAge.getText());
-                model.updateRecord(view.id[0], name, age);
+                model.updateRecord(viewController.id[0], name, age);
             }
         }
     }
@@ -78,11 +74,11 @@ public class JCTrade {
 
             System.out.println("delete button");
 
-            int i = view.jList.getSelectedIndex();
-            String s = view.jList.getSelectedValue();
+            int i = viewController.jList.getSelectedIndex();
+            String s = viewController.jList.getSelectedValue();
             String[] words = s.trim().split(" ");
             int id = Integer.parseInt(words[0]);
-            view.listModel.remove(i);
+            viewController.listModel.remove(i);
             model.deleteRecord(id);
         }
     }
@@ -109,7 +105,6 @@ public class JCTrade {
 
         model = new Model();
         model.model();
-
         ViewController viewController = new ViewController();
 
         viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
