@@ -11,7 +11,6 @@ public class JCTrade {
 
     ViewController viewController;
     Model model;
-    View view;
 
     class ChangeTabChangeListener implements ChangeListener {
         @Override
@@ -105,7 +104,7 @@ public class JCTrade {
 
         model = new Model();
         model.model();
-        ViewController viewController = new ViewController();
+        viewController = new ViewController();
 
         viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
         viewController.updateTab.updateList.addListSelectionListener(new UpdateListSelectionListener());
