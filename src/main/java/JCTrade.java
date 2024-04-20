@@ -1,4 +1,8 @@
 
+import net.jacobpeterson.alpaca.AlpacaAPI;
+import net.jacobpeterson.alpaca.AlpacaModel;
+import net.jacobpeterson.alpaca.openapi.trader.ApiException;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
@@ -6,11 +10,13 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class JCTrade {
 
     ViewController viewController;
     Model model;
+    AlpacaModel alpacaModel;
 
     class ChangeTabChangeListener implements ChangeListener {
         @Override
@@ -85,16 +91,27 @@ public class JCTrade {
 
     class CreateButtonActionListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
-
-            System.out.println("create button");
-
-            String name = viewController.createTab.addTextFieldName.getText();
-            int age = -1;
-            try {age = Integer.parseInt(viewController.createTab.addTextFieldAge.getText());} catch(NumberFormatException nfe) {}
-            if (!name.isEmpty() && !(age == -1)) {
-                model.createRecord(name, age);
+        public void actionPerformed(ActionEvent actionEvent) {
+            String keyID = viewController.createTab.getKeyTextField().getText();
+            String secretKey = viewController.createTab.getSecretKeyTextField().getText();
+            try{
+                AlpacaAPI alpacaAPI = alpacaModel.createConnection(keyID, secretKey);
+                UUID uuid = alpacaAPI.trader().accounts().getAccount().getId();
+                System.out.println("UUID : " + uuid);
+            } catch(ApiException e){
+                System.out.println("ERROR: Invalid keys!");
             }
+
+//            String name = viewController.createTab.getKeyTextField().getText();
+//            int age = -1;
+//            try {
+//                age = Integer.parseInt(viewController.createTab.getSecretKeyTextField().getText());
+//            } catch(Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (!name.isEmpty() && !(age == -1)) {
+//                model.createRecord(name, age);
+//            }
 
         }
     }
@@ -105,6 +122,7 @@ public class JCTrade {
         model = new Model();
         model.model();
         viewController = new ViewController();
+        alpacaModel = new AlpacaModel();
 
         viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
         viewController.updateTab.updateList.addListSelectionListener(new UpdateListSelectionListener());
