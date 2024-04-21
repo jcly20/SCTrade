@@ -1,8 +1,5 @@
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionListener;
 
 public abstract class View {
 
@@ -15,7 +12,7 @@ public abstract class View {
     protected JButton updateButton;
     protected final int[] id= new int[1];
     protected JButton deleteButton;
-    protected JButton createButton;
+    protected JButton loginButton;
 
     public abstract JPanel makeTab() ;
 

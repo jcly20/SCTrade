@@ -88,17 +88,28 @@ public class JCTrade {
         }
     }
 
+    class LogoutButtonActionListener implements ActionListener{
 
-    class CreateButtonActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            alpacaModel.logout();
+            viewController.authenticateTab.logout();
+        }
+    }
+
+
+    class LoginButtonActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String keyID = viewController.createTab.getKeyTextField().getText();
-            String secretKey = viewController.createTab.getSecretKeyTextField().getText();
+            String keyID = viewController.authenticateTab.getKeyTextField().getText();
+            String secretKey = viewController.authenticateTab.getSecretKeyTextField().getText();
             try{
-                AlpacaAPI alpacaAPI = alpacaModel.createConnection(keyID, secretKey);
-                UUID uuid = alpacaAPI.trader().accounts().getAccount().getId();
-                System.out.println("UUID : " + uuid);
+                alpacaModel.createConnection(keyID, secretKey);
+                UUID uuid = alpacaModel.getUUID();
+                viewController.authenticateTab.printSuccessfulLogin(uuid);
             } catch(ApiException e){
+                viewController.authenticateTab.printInvalidKeysError();
                 System.out.println("ERROR: Invalid keys!");
             }
 
@@ -128,7 +139,8 @@ public class JCTrade {
         viewController.updateTab.updateList.addListSelectionListener(new UpdateListSelectionListener());
         viewController.updateTab.updateButton.addActionListener(new UpdateButtonActionListener());
         viewController.deleteTab.deleteButton.addActionListener(new DeleteButtonActionListener());
-        viewController.createTab.createButton.addActionListener(new CreateButtonActionListener());
+        viewController.authenticateTab.setLoginButtonActionListener(new LoginButtonActionListener());
+        viewController.authenticateTab.setLogoutButtonActionListener(new LogoutButtonActionListener());
 
     }
 
