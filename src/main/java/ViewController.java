@@ -5,9 +5,8 @@ public class ViewController extends View {
 
     DefaultListModel<String> listModel = new DefaultListModel<>();
     AuthenticateTab authenticateTab = new AuthenticateTab();
-    ReadTab readTab = new ReadTab();
-    UpdateTab updateTab = new UpdateTab();
-    DeleteTab deleteTab = new DeleteTab();
+    MarketTab marketTab = new MarketTab();
+    PortfolioTab portfolioTab = new PortfolioTab();
 
 
     public ViewController() {
@@ -16,10 +15,8 @@ public class ViewController extends View {
         jTabs = new JTabbedPane();
 
         jTabs.add("AUTHENTICATE", authenticateTab.makeTab());
-        jTabs.add("READ", readTab.makeTab());
-        jTabs.add("UPDATE", updateTab.makeTab());
-        jTabs.add("DELETE", deleteTab.makeTab());
-
+        jTabs.add("MARKET", marketTab.makeTab());
+        jTabs.add("PORTFOLIO", portfolioTab.makeTab());
 
         jFrame.add(jTabs);
         jFrame.setSize(500,500);

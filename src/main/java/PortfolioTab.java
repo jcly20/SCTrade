@@ -3,17 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.UUID;
 
-public class AuthenticateTab extends View  {
+public class PortfolioTab extends View {
+
+
     private JTextField keyTextField;
     private JTextField secretKeyTextField;
     private JTextArea createTabHeader;
     private JPanel enterKeysJPanel;
     private JButton loginButton;
     private JButton logoutButton;
-    private String welcomeMessage = ("Welcome to SCTrade! Enter your Alpaca API keys to login.");
+    private String welcomeMessage = ("Welcome to your SCTrade Portfolio");
 
 
-    public JPanel makeTab(){
+    public JPanel makeTab() {
 
         jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
@@ -37,6 +39,7 @@ public class AuthenticateTab extends View  {
         enterKeysJPanel.add(this.logoutButton);
         jPanel.add(enterKeysJPanel, BorderLayout.CENTER);
         return jPanel;
+
     }
 
     public JTextField getSecretKeyTextField() {
@@ -56,11 +59,11 @@ public class AuthenticateTab extends View  {
     }
 
     protected void printInvalidKeysError(){
-          createTabHeader.setText(welcomeMessage + "\nERROR: Invalid Keys! Could not login.");
+        createTabHeader.setText(welcomeMessage + "\nERROR: Invalid Keys! Could not login.");
     }
     protected void printSuccessfulLogin(UUID uuid){
         createTabHeader.setText("Welcome, you have successfully logged in!\n" +
-                                "Acount UUID: " + uuid);
+                "Acount UUID: " + uuid);
     }
 
     protected void logout(){
@@ -72,4 +75,3 @@ public class AuthenticateTab extends View  {
     public void viewController() {}
 
 }
-
