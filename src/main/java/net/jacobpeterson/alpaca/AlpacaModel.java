@@ -60,4 +60,19 @@ public class AlpacaModel {
         return latestTrade.getP();
 
     }
+
+    public String sellShare(String ticker) throws ApiException {
+
+        final Order openingOrder = alpacaAPI.trader().orders()
+                .postOrder(new PostOrderRequest()
+                        .symbol(ticker)
+                        .qty("1")
+                        .side(OrderSide.BUY)
+                        .type(OrderType.MARKET)
+                        .timeInForce(TimeInForce.GTC));
+        System.out.println("Opening Apple order: " + openingOrder);
+
+        return openingOrder.getSymbol();
+
+    }
 }
