@@ -3,7 +3,7 @@ import javax.swing.event.ChangeListener;
 
 public class ViewController extends View {
 
-    DefaultListModel<String> listModel = new DefaultListModel<>();
+    //DefaultListModel<String> listModel = new DefaultListModel<>();
     AuthenticateTab authenticateTab = new AuthenticateTab();
     MarketTab marketTab = new MarketTab();
     PortfolioTab portfolioTab = new PortfolioTab();
@@ -19,7 +19,7 @@ public class ViewController extends View {
         jTabs.add("PORTFOLIO", portfolioTab.makeTab());
 
         jFrame.add(jTabs);
-        jFrame.setSize(500,500);
+        jFrame.setSize(600,700);
         jFrame.setVisible(true);
 
     }

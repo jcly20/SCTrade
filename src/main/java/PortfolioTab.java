@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.UUID;
@@ -28,49 +29,23 @@ public class PortfolioTab extends View {
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
         secretKeyTextField = new JTextField(40);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
-        enterKeysJPanel.add(new JLabel("key ID:"));
-        enterKeysJPanel.add(keyTextField);
-        enterKeysJPanel.add(new JLabel("Secret Key:"));
-        enterKeysJPanel.add(secretKeyTextField);
-        loginButton = new JButton("Login");
-        enterKeysJPanel.add(loginButton);
 
-        logoutButton = new JButton("Logout");
-        enterKeysJPanel.add(this.logoutButton);
-        jPanel.add(enterKeysJPanel, BorderLayout.CENTER);
+        //listModel = new DefaultListModel<String>();
+        jList = new JList<String>(listModel);
+        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jPanel.add(jList, BorderLayout.CENTER);
+
+        deleteButton = new JButton("DELETE");
+        jPanel.add(deleteButton, BorderLayout.SOUTH);
+
         return jPanel;
 
     }
 
-    public JTextField getSecretKeyTextField() {
-        return secretKeyTextField;
-    }
 
-    public JTextField getKeyTextField() {
-        return keyTextField;
-    }
+    public void setListSelectionListener(ListSelectionListener sl) { updateList.addListSelectionListener(sl); }
 
-    public void setLoginButtonActionListener(ActionListener al) {
-        this.loginButton.addActionListener(al);
-    }
-
-    public void setLogoutButtonActionListener(ActionListener al){
-        logoutButton.addActionListener(al);
-    }
-
-    protected void printInvalidKeysError(){
-        createTabHeader.setText(welcomeMessage + "\nERROR: Invalid Keys! Could not login.");
-    }
-    protected void printSuccessfulLogin(UUID uuid){
-        createTabHeader.setText("Welcome, you have successfully logged in!\n" +
-                "Acount UUID: " + uuid);
-    }
-
-    protected void logout(){
-        keyTextField.setText("");
-        secretKeyTextField.setText("");
-        createTabHeader.setText(welcomeMessage);
-    }
+    public void setDeleteButtonActionListener(ActionListener al) { deleteButton.addActionListener(al); }
 
     public void viewController() {}
 

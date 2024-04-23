@@ -1,16 +1,15 @@
 
-import net.jacobpeterson.alpaca.AlpacaAPI;
 import net.jacobpeterson.alpaca.AlpacaModel;
 import net.jacobpeterson.alpaca.openapi.trader.ApiException;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.UUID;
+
+
 
 public class JCTrade {
 
@@ -24,13 +23,21 @@ public class JCTrade {
 
             System.out.println("change tab");
 
-//            ArrayList<String> arrayList = new ArrayList<String>();
-//            arrayList = model.selectAll();
-//
-//            viewController.listModel.clear();
-//            for (String s : arrayList) {
-//                viewController.listModel.addElement(s);
-//            }
+            ArrayList<String> symbols = new ArrayList<>();
+            ArrayList<String> quantity = new ArrayList<>();
+            ArrayList<String> price = new ArrayList<>();
+            ArrayList<String> profit = new ArrayList<>();
+
+            try {
+                symbols = alpacaModel.getPositions('s');
+            } catch (ApiException a) {
+                a.printStackTrace();
+            }
+
+            viewController.listModel.clear();
+            for (String s : symbols) {
+                viewController.listModel.addElement(s);
+            }
         }
     }
 
