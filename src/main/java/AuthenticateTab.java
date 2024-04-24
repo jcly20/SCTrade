@@ -7,7 +7,7 @@ public class AuthenticateTab extends View  {
     private JTextField keyTextField;
     private JTextField secretKeyTextField;
     private JTextArea createTabHeader;
-    private JPanel enterKeysJPanel;
+    private JPanel authenticateJPanel;
     private JButton loginButton;
     private JButton logoutButton;
     private String welcomeMessage = ("Welcome to SCTrade! Enter your Alpaca API keys to login.");
@@ -17,8 +17,9 @@ public class AuthenticateTab extends View  {
 
         jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
-        enterKeysJPanel = new JPanel();
-        enterKeysJPanel.setLayout(new GridLayout(3, 2));
+        authenticateJPanel = new JPanel();
+        authenticateJPanel.setBackground(Color.BLACK);
+        authenticateJPanel.setLayout(new GridLayout(3, 2));
         keyTextField = new JTextField(40);
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 50));
@@ -26,16 +27,16 @@ public class AuthenticateTab extends View  {
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
         secretKeyTextField = new JTextField(40);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
-        enterKeysJPanel.add(new JLabel("key ID:"));
-        enterKeysJPanel.add(keyTextField);
-        enterKeysJPanel.add(new JLabel("Secret Key:"));
-        enterKeysJPanel.add(secretKeyTextField);
+        authenticateJPanel.add(new JLabel("key ID:"));
+        authenticateJPanel.add(keyTextField);
+        authenticateJPanel.add(new JLabel("Secret Key:"));
+        authenticateJPanel.add(secretKeyTextField);
         loginButton = new JButton("Login");
-        enterKeysJPanel.add(loginButton);
+        authenticateJPanel.add(loginButton);
 
         logoutButton = new JButton("Logout");
-        enterKeysJPanel.add(this.logoutButton);
-        jPanel.add(enterKeysJPanel, BorderLayout.CENTER);
+        authenticateJPanel.add(this.logoutButton);
+        jPanel.add(authenticateJPanel, BorderLayout.CENTER);
         return jPanel;
     }
 

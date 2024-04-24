@@ -33,11 +33,10 @@ public class JCTrade {
                 a.printStackTrace();
             }
 
-            viewController.listModel.clear();
+            viewController.portfolioTab.listModel.clear();
             for (String s : symbols) {
-                viewController.listModel.addElement(s);
+                viewController.portfolioTab.listModel.addElement(s);
             }
-            System.out.println("list model: " + viewController.listModel);
         }
     }
 

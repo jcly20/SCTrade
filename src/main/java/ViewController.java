@@ -22,7 +22,8 @@ public class ViewController extends View {
         jTabs.add("PORTFOLIO", portfolioTab.makeTab());
 
         jFrame.add(jTabs);
-        jFrame.setBackground(Color.BLACK);
+        jFrame.getContentPane().setBackground(Color.BLACK);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(600,700);
         jFrame.setVisible(true);
 

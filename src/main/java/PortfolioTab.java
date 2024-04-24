@@ -13,6 +13,7 @@ public class PortfolioTab extends View {
     private JPanel enterKeysJPanel;
     private JButton loginButton;
     private JButton logoutButton;
+    JPanel portfolioJPanel;
     private String welcomeMessage = ("Welcome to your SCTrade Portfolio");
 
 
@@ -20,8 +21,11 @@ public class PortfolioTab extends View {
 
         jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
-        enterKeysJPanel = new JPanel();
-        enterKeysJPanel.setLayout(new GridLayout(3, 2));
+
+        portfolioJPanel = new JPanel();
+        portfolioJPanel.setBackground(Color.BLACK);
+        portfolioJPanel.setLayout(new GridLayout(3, 2));
+
         keyTextField = new JTextField(40);
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 50));

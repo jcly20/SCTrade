@@ -9,13 +9,16 @@ public class MarketTab extends View {
     private JTextArea createTabHeader;
     private JButton searchButton;
     private JButton buyButton;
+    JPanel marketJPanel;
     String welcomeMessage = ("Welcome to SCTrade Market Watch");
 
     public JPanel makeTab() {
 
         jPanel = new JPanel();
-        JPanel marketJPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
+
+        marketJPanel = new JPanel();
+        marketJPanel.setBackground(Color.BLACK);
         marketJPanel.setLayout(new GridLayout(3, 2));
         
         createTabHeader = new JTextArea(welcomeMessage);
