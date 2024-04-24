@@ -22,8 +22,8 @@ public class AlpacaModel {
     }
 
     public void createConnection(String keyID, String secretKey) throws ApiException {
-//        keyID = "PKBIBI0HHEZKJ9GQXPKI";
-//        secretKey = "SqKPm3Q1SbZqjGKuN5FvGR1VrVxtBpAd8EtNGcu7";
+        keyID = "PKBIBI0HHEZKJ9GQXPKI";
+        secretKey = "SqKPm3Q1SbZqjGKuN5FvGR1VrVxtBpAd8EtNGcu7";
         final TraderAPIEndpointType endpointType = TraderAPIEndpointType.PAPER; // or 'LIVE'
         final MarketDataWebsocketSourceType sourceType = MarketDataWebsocketSourceType.IEX; // or 'SIP'
         alpacaAPI = new AlpacaAPI(keyID, secretKey, endpointType, sourceType);
@@ -99,13 +99,18 @@ public class AlpacaModel {
 //        }
 
         ArrayList<String> symbols = new ArrayList<>();
-
+        ArrayList<String> position_information_list = new ArrayList<String>();
         final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
         for (Position position : positions) {
-            symbols.add(position.getSymbol());
+            String symbol = position.getSymbol();
+            String avgEntryPrice = position.getAvgEntryPrice();
+            String qty = position.getQty();
+            String unrealizedProfitLoss = position.getUnrealizedPl();
+            String position_information = String.format("%s\t\t\t\t\t\t\t Avg Entry Price %s\t Quantity %s\t Performance %s\t", symbol, avgEntryPrice, qty, unrealizedProfitLoss);
+            position_information_list.add(position_information);
         }
 
-        return symbols;
+        return position_information_list;
 
     }
 }
