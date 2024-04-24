@@ -14,7 +14,6 @@ import java.util.UUID;
 public class JCTrade {
 
     ViewController viewController;
-    Model model;
     AlpacaModel alpacaModel;
 
     class ChangeTabChangeListener implements ChangeListener {

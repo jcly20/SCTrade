@@ -14,6 +14,8 @@ public class ViewController extends View {
         jFrame = new JFrame();
         jTabs = new JTabbedPane();
 
+        listModel = new DefaultListModel<String>();
+
         jTabs.add("AUTHENTICATE", authenticateTab.makeTab());
         jTabs.add("MARKET", marketTab.makeTab());
         jTabs.add("PORTFOLIO", portfolioTab.makeTab());

@@ -12,16 +12,16 @@ public class DeleteTab extends View {
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jPanel.add(jList);
 
-        deleteButton = new JButton("DELETE");
-        jPanel.add(deleteButton);
+       // deleteButton = new JButton("DELETE");
+        //jPanel.add(deleteButton);
         return jPanel;
 
     }
 
 
-    public void setListSelectionListener(ListSelectionListener sl) { updateList.addListSelectionListener(sl); }
+    //public void setListSelectionListener(ListSelectionListener sl) { updateList.addListSelectionListener(sl); }
 
-    public void setDeleteButtonActionListener(ActionListener al) { deleteButton.addActionListener(al); }
+    //public void setDeleteButtonActionListener(ActionListener al) { deleteButton.addActionListener(al); }
 
     public void viewController() {}
 
