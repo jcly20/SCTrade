@@ -47,7 +47,7 @@ public class AlpacaModel {
                         .side(OrderSide.BUY)
                         .type(OrderType.MARKET)
                         .timeInForce(TimeInForce.GTC));
-        System.out.println("Opening Apple order: " + openingOrder);
+        System.out.println("Opening order: " + openingOrder);
 
         return openingOrder.getSymbol();
 
@@ -66,16 +66,16 @@ public class AlpacaModel {
 
     public String sellShare(String ticker) throws ApiException {
 
-        final Order openingOrder = alpacaAPI.trader().orders()
+        final Order closingOrder = alpacaAPI.trader().orders()
                 .postOrder(new PostOrderRequest()
                         .symbol(ticker)
                         .qty("1")
-                        .side(OrderSide.BUY)
+                        .side(OrderSide.SELL)
                         .type(OrderType.MARKET)
                         .timeInForce(TimeInForce.GTC));
-        System.out.println("Opening Apple order: " + openingOrder);
+        System.out.println("closing order: " + closingOrder);
 
-        return openingOrder.getSymbol();
+        return closingOrder.getSymbol();
 
     }
 

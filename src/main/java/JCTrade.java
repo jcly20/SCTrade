@@ -1,6 +1,7 @@
 
 import net.jacobpeterson.alpaca.AlpacaModel;
 import net.jacobpeterson.alpaca.openapi.trader.ApiException;
+import net.jacobpeterson.alpaca.openapi.trader.model.*;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -79,20 +80,26 @@ public class JCTrade {
 //    }
 
 
-//    class DeleteButtonActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//
-//            System.out.println("delete button");
-//
-//            int i = viewController.jList.getSelectedIndex();
-//            String s = viewController.jList.getSelectedValue();
-//            String[] words = s.trim().split(" ");
-//            int id = Integer.parseInt(words[0]);
-//            viewController.listModel.remove(i);
-//            model.deleteRecord(id);
-//        }
-//    }
+    class SellButtonActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("sell button");
+
+            String ticker = viewController.portfolioTab.jList.getSelectedValue();
+            //this needs to remove the ticker from list 
+            System.out.println("selling: " + ticker);
+
+            try {
+                String confirmedTicker = alpacaModel.sellShare(ticker);
+                viewController.portfolioTab.printSuccessfulSell(confirmedTicker);
+                System.out.println("stock purchased!");
+            } catch(ApiException a){
+                viewController.portfolioTab.printSellError();
+                System.out.println("ERROR: stock not sold!");
+            }
+        }
+    }
 
     class LogoutButtonActionListener implements ActionListener{
 
@@ -118,18 +125,6 @@ public class JCTrade {
                 viewController.authenticateTab.printInvalidKeysError();
                 System.out.println("ERROR: Invalid keys!");
             }
-
-//            String name = viewController.createTab.getKeyTextField().getText();
-//            int age = -1;
-//            try {
-//                age = Integer.parseInt(viewController.createTab.getSecretKeyTextField().getText());
-//            } catch(Exception e) {
-//                e.printStackTrace();
-//            }
-//            if (!name.isEmpty() && !(age == -1)) {
-//                model.createRecord(name, age);
-//            }
-
         }
     }
 
@@ -180,9 +175,7 @@ public class JCTrade {
         alpacaModel = new AlpacaModel();
 
       viewController.setChangeTabChangeLister(new ChangeTabChangeListener());
-//        viewController.updateTab.updateList.addListSelectionListener(new UpdateListSelectionListener());
-//        viewController.updateTab.updateButton.addActionListener(new UpdateButtonActionListener());
-//        viewController.deleteTab.deleteButton.addActionListener(new DeleteButtonActionListener());
+        viewController.portfolioTab.sellButton.addActionListener(new SellButtonActionListener());
         viewController.authenticateTab.setLoginButtonActionListener(new LoginButtonActionListener());
         viewController.authenticateTab.setLogoutButtonActionListener(new LogoutButtonActionListener());
         viewController.marketTab.setSearchButtonActionListener(new SearchButtonActionListener());

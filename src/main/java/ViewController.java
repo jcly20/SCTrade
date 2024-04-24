@@ -4,7 +4,6 @@ import java.awt.*;
 
 public class ViewController extends View {
 
-    //DefaultListModel<String> listModel = new DefaultListModel<>();
     AuthenticateTab authenticateTab = new AuthenticateTab();
     MarketTab marketTab = new MarketTab();
     PortfolioTab portfolioTab = new PortfolioTab();

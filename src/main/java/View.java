@@ -9,9 +9,7 @@ public abstract class View {
     protected JTabbedPane jTabs;
     protected JList<String> jList;
     protected JList<String> updateList;
-    protected JButton updateButton;
     protected final int[] id= new int[1];
-    protected JButton deleteButton;
 
     public abstract JPanel makeTab() ;
 
