@@ -37,6 +37,7 @@ public class JCTrade {
             for (String s : symbols) {
                 viewController.listModel.addElement(s);
             }
+            System.out.println("list model: " + viewController.listModel);
         }
     }
 

@@ -30,9 +30,7 @@ public class PortfolioTab extends View {
         secretKeyTextField = new JTextField(40);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
 
-        System.out.println("lisModel1: " + listModel);
         listModel = new DefaultListModel<String>();
-        System.out.println("lisModel2: " + listModel);
         jList = new JList<String>(listModel);
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jPanel.add(jList, BorderLayout.CENTER);

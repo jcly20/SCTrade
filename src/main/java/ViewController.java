@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 
 public class ViewController extends View {
 
@@ -21,6 +22,7 @@ public class ViewController extends View {
         jTabs.add("PORTFOLIO", portfolioTab.makeTab());
 
         jFrame.add(jTabs);
+        jFrame.setBackground(Color.BLACK);
         jFrame.setSize(600,700);
         jFrame.setVisible(true);
 
