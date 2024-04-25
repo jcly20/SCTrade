@@ -79,7 +79,7 @@ public class AlpacaModel {
 
     }
 
-    public ArrayList<String> getPositions(char type) throws ApiException {
+    public ArrayList<String> getPositions() throws ApiException {
 
 //        ArrayList<ArrayList<String>> positionModel = new ArrayList<>();
 //        final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
@@ -98,14 +98,22 @@ public class AlpacaModel {
 //            System.out.println("position: " + positionModel.getElementAt(i));
 //        }
 
-        ArrayList<String> symbols = new ArrayList<>();
+        ArrayList<String> positionList = new ArrayList<>();
 
         final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
         for (Position position : positions) {
-            symbols.add(position.getSymbol());
+            String positionData = "";
+            positionData = position.getSymbol() + " \t         " + position.getQty() + " \t         " +
+                    String.format("%.2f",Double.parseDouble(position.getCurrentPrice())) + " \t         " +
+                    String.format("%.2f",Double.parseDouble(position.getUnrealizedPl()));
+//            positionData = positionData.concat(position.getSymbol());
+//            positionData = positionData.concat(position.getQty());
+//            positionData = positionData.concat(position.getCurrentPrice());
+//            positionData = positionData.concat(position.getUnrealizedPl());
+            positionList.add(positionData);
         }
 
-        return symbols;
+        return positionList;
 
     }
 }

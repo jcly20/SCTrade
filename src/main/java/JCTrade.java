@@ -23,20 +23,24 @@ public class JCTrade {
 
             System.out.println("change tab");
 
-            ArrayList<String> symbols = new ArrayList<>();
-            ArrayList<String> quantity = new ArrayList<>();
-            ArrayList<String> price = new ArrayList<>();
-            ArrayList<String> profit = new ArrayList<>();
+//            ArrayList<String> symbols = new ArrayList<>();
+//            ArrayList<String> quantity = new ArrayList<>();
+//            ArrayList<String> price = new ArrayList<>();
+//            ArrayList<String> profit = new ArrayList<>();
+
+            ArrayList<String> positions = new ArrayList<>();
 
             try {
-                symbols = alpacaModel.getPositions('s');
+                positions = alpacaModel.getPositions();
             } catch (ApiException a) {
                 a.printStackTrace();
             }
 
+            System.out.println("positions: " + positions);
+
             viewController.portfolioTab.listModel.clear();
-            for (String s : symbols) {
-                viewController.portfolioTab.listModel.addElement(s);
+            for (String p : positions) {
+                viewController.portfolioTab.listModel.addElement(p);
             }
         }
     }
@@ -86,18 +90,28 @@ public class JCTrade {
 
             System.out.println("sell button");
 
+            //int i = viewController.portfolioTab.jList.getSelectedIndex();
             String ticker = viewController.portfolioTab.jList.getSelectedValue();
-            //this needs to remove the ticker from list 
+
+            //parse first few characters of position to get symbol
+            //search for first whitespace
+
             System.out.println("selling: " + ticker);
 
             try {
                 String confirmedTicker = alpacaModel.sellShare(ticker);
                 viewController.portfolioTab.printSuccessfulSell(confirmedTicker);
-                System.out.println("stock purchased!");
+                System.out.println("stock sold!");
             } catch(ApiException a){
                 viewController.portfolioTab.printSellError();
                 System.out.println("ERROR: stock not sold!");
             }
+
+            //reload positions with updated data
+            //alpacaModel.getPositions()
+            //clear and set listModel
+
+
         }
     }
 
