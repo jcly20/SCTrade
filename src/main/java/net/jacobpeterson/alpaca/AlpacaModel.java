@@ -89,14 +89,19 @@ public class AlpacaModel {
             positionData = position.getSymbol() + " \t         " + position.getQty() + " \t         " +
                     String.format("%.2f",Double.parseDouble(position.getCurrentPrice())) + " \t         " +
                     String.format("%.2f",Double.parseDouble(position.getUnrealizedPl()));
-//            positionData = positionData.concat(position.getSymbol());
-//            positionData = positionData.concat(position.getQty());
-//            positionData = positionData.concat(position.getCurrentPrice());
-//            positionData = positionData.concat(position.getUnrealizedPl());
+
             positionList.add(positionData);
         }
 
         return positionList;
 
     }
+
+    public String getAccountCash() throws ApiException {
+
+        final Account account = alpacaAPI.trader().accounts().getAccount();
+
+        return account.getCash();
+    }
+
 }

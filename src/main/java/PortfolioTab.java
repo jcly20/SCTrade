@@ -6,11 +6,11 @@ import java.util.UUID;
 
 public class PortfolioTab extends View {
 
-    private JTextArea createTabHeader;
+    JTextArea createTabHeader;
     JPanel portfolioJPanel;
     JButton sellButton;
-    private final String welcomeMessage = ("Welcome to your SCTrade Portfolio \n" +
-            "Symbol - Quantity - Price - P/L");
+    String welcomeMessage = ("Welcome to your SCTrade Portfolio \n" +
+            "Symbol - Quantity - Price - P/L -- Cash in Account: 111");
 
     public JPanel makeTab() {
 

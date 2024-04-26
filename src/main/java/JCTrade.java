@@ -7,6 +7,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.PackedColorModel;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.lang.Thread;
@@ -25,9 +26,11 @@ public class JCTrade {
             System.out.println("change tab");
 
             ArrayList<String> positions = new ArrayList<>();
+            String cash = null;
 
             try {
                 positions = alpacaModel.getPositions();
+                cash = alpacaModel.getAccountCash();
             } catch (ApiException a) {
                 a.printStackTrace();
             }
@@ -39,7 +42,8 @@ public class JCTrade {
                 viewController.portfolioTab.listModel.addElement(p);
             }
 
-
+            String header = viewController.portfolioTab.welcomeMessage.substring(0, viewController.portfolioTab.welcomeMessage.lastIndexOf(" "));
+            viewController.portfolioTab.createTabHeader.setText(header + " " + cash);
 
         }
     }
@@ -68,10 +72,12 @@ public class JCTrade {
             }
 
             ArrayList<String> positions = new ArrayList<>();
+            String cash = new String();
 
             try {
                 Thread.sleep(500);
                 positions = alpacaModel.getPositions();
+                cash = alpacaModel.getAccountCash();
             } catch (ApiException a) {
                 a.printStackTrace();
             } catch (InterruptedException ex) {
@@ -84,6 +90,10 @@ public class JCTrade {
             for (String p : positions) {
                 viewController.portfolioTab.listModel.addElement(p);
             }
+
+            String header = viewController.portfolioTab.welcomeMessage.substring(0, viewController.portfolioTab.welcomeMessage.lastIndexOf(" "));
+            viewController.portfolioTab.createTabHeader.setText(header + " " + cash);
+
         }
     }
 
@@ -114,7 +124,7 @@ public class JCTrade {
         }
     }
 
-    
+
     class SearchButtonActionListener implements ActionListener {
 
         @Override
