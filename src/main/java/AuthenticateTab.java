@@ -23,7 +23,7 @@ public class AuthenticateTab extends View  {
         keyTextField = new JTextField(40);
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 50));
-        createTabHeader.setFont(new Font("Arial", 20, 18));
+        createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
         secretKeyTextField = new JTextField(40);
         jPanel.add(createTabHeader, BorderLayout.NORTH);

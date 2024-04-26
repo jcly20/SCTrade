@@ -81,23 +81,6 @@ public class AlpacaModel {
 
     public ArrayList<String> getPositions() throws ApiException {
 
-//        ArrayList<ArrayList<String>> positionModel = new ArrayList<>();
-//        final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
-//        System.out.println("positions \n" + positions);
-//        for (Position position : positions) {
-//            ArrayList<String> positionData = new ArrayList<>();
-//            positionData.add(position.getSymbol());
-//            positionData.add(position.getQty());
-//            positionData.add(position.getCurrentPrice());
-//            String profit = String.format("%.2f", Double.parseDouble(position.getMarketValue()) - Double.parseDouble(position.getCostBasis()));
-//            positionData.add(profit);
-//            positionModel.add(positionData);
-//        }
-
-//        for (int i=0; i<positionModel.getSize(); i++) {
-//            System.out.println("position: " + positionModel.getElementAt(i));
-//        }
-
         ArrayList<String> positionList = new ArrayList<>();
 
         final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
@@ -106,14 +89,19 @@ public class AlpacaModel {
             positionData = position.getSymbol() + " \t         " + position.getQty() + " \t         " +
                     String.format("%.2f",Double.parseDouble(position.getCurrentPrice())) + " \t         " +
                     String.format("%.2f",Double.parseDouble(position.getUnrealizedPl()));
-//            positionData = positionData.concat(position.getSymbol());
-//            positionData = positionData.concat(position.getQty());
-//            positionData = positionData.concat(position.getCurrentPrice());
-//            positionData = positionData.concat(position.getUnrealizedPl());
+
             positionList.add(positionData);
         }
 
         return positionList;
 
     }
+
+    public String getAccountCash() throws ApiException {
+
+        final Account account = alpacaAPI.trader().accounts().getAccount();
+
+        return account.getCash();
+    }
+
 }
