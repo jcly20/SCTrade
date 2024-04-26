@@ -10,6 +10,8 @@ public class AuthenticateTab extends View  {
     private JPanel authenticateJPanel;
     private JButton loginButton;
     private JButton logoutButton;
+    private JLabel keyLabel;
+    private JLabel secretKeyLabel;
     private String welcomeMessage = ("Welcome to SCTrade! Enter your Alpaca API keys to login.");
 
 
@@ -17,25 +19,38 @@ public class AuthenticateTab extends View  {
 
         jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
+
         authenticateJPanel = new JPanel();
-        authenticateJPanel.setBackground(Color.BLACK);
-        authenticateJPanel.setLayout(new GridLayout(3, 2));
-        keyTextField = new JTextField(40);
+        authenticateJPanel.setLayout(new GridLayout(6, 2));
+
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 50));
         createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
-        secretKeyTextField = new JTextField(40);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
-        authenticateJPanel.add(new JLabel("key ID:"));
+
+        keyLabel = new JLabel("key ID:");
+        keyLabel.setPreferredSize(new Dimension(25, 25));
+        authenticateJPanel.add(keyLabel);
+
+        keyTextField = new JTextField(40);
+        keyTextField.setSize(10, 10);
         authenticateJPanel.add(keyTextField);
-        authenticateJPanel.add(new JLabel("Secret Key:"));
+
+        secretKeyLabel = new JLabel("key ID:");
+        secretKeyLabel.setPreferredSize(new Dimension(25, 25));
+        authenticateJPanel.add(secretKeyLabel);
+
+        secretKeyTextField = new JTextField(40);
+        secretKeyTextField.setPreferredSize(new Dimension(25, 25));
         authenticateJPanel.add(secretKeyTextField);
+
         loginButton = new JButton("Login");
         authenticateJPanel.add(loginButton);
 
         logoutButton = new JButton("Logout");
         authenticateJPanel.add(this.logoutButton);
+
         jPanel.add(authenticateJPanel, BorderLayout.CENTER);
         return jPanel;
     }

@@ -56,6 +56,7 @@ public class JCTrade {
             System.out.println("sell button");
 
             String data = viewController.portfolioTab.jList.getSelectedValue();
+            String qty = viewController.portfolioTab.getQuantityTextField().getText();
 
             String[] stockData = data.split(" ", 2);
             String ticker = stockData[0];
@@ -63,9 +64,9 @@ public class JCTrade {
             System.out.println("selling: " + ticker);
 
             try {
-                String confirmedTicker = alpacaModel.sellShare(ticker);
-                viewController.portfolioTab.printSuccessfulSell(confirmedTicker);
-                System.out.println("stock sold!");
+                String confirmedTicker = alpacaModel.sellShare(ticker, qty);
+                //viewController.portfolioTab.printSuccessfulSell(confirmedTicker, qty);
+                System.out.println(confirmedTicker + " sold!");
             } catch(ApiException a){
                 viewController.portfolioTab.printSellError();
                 System.out.println("ERROR: stock not sold!");
@@ -132,6 +133,7 @@ public class JCTrade {
             System.out.println("search for stock");
 
             String ticker = viewController.marketTab.getTickerTextField().getText();
+            ticker = ticker.toUpperCase();
             try {
                 double price = alpacaModel.searchShare(ticker);
                 viewController.marketTab.printStockData(ticker, price);
@@ -150,14 +152,17 @@ public class JCTrade {
         public void actionPerformed(ActionEvent actionEvent) {
             System.out.println("buying stock");
 
+            String qty = viewController.marketTab.getQuantityTextField().getText();
             String ticker = viewController.marketTab.getTickerTextField().getText();
             ticker = ticker.toUpperCase();
+
             try {
-                String confirmedTicker = alpacaModel.buyShare(ticker);
-                viewController.marketTab.printSuccessfulPurchase(confirmedTicker);
+                String confirmedTicker = alpacaModel.buyShare(ticker, qty);
+                viewController.marketTab.printSuccessfulPurchase(confirmedTicker, qty);
                 System.out.println("stock purchased!");
             } catch(ApiException e){
                 viewController.marketTab.printPurchaseError();
+                e.printStackTrace();
                 System.out.println("ERROR: stock not purchased!");
             }
 

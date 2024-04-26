@@ -6,6 +6,7 @@ import java.util.UUID;
 public class MarketTab extends View {
 
     private JTextField tickerTextField;
+    private JTextField quantityTextField;
     private JTextArea createTabHeader;
     private JButton searchButton;
     private JButton buyButton;
@@ -19,9 +20,8 @@ public class MarketTab extends View {
         jPanel.setLayout(new BorderLayout());
 
         marketJPanel = new JPanel();
-        marketJPanel.setBackground(Color.BLACK);
-        marketJPanel.setLayout(new GridLayout(3, 2));
-        
+        marketJPanel.setLayout(new GridLayout(6, 2));
+
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 50));
         createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -31,6 +31,10 @@ public class MarketTab extends View {
         tickerTextField = new JTextField(40);
         marketJPanel.add(new JLabel("symbol:"));
         marketJPanel.add(tickerTextField);
+
+        quantityTextField = new JTextField(40);
+        marketJPanel.add(new JLabel("quantity:"));
+        marketJPanel.add(quantityTextField);
 
         searchButton = new JButton("Search");
         marketJPanel.add(searchButton);
@@ -47,6 +51,10 @@ public class MarketTab extends View {
         return tickerTextField;
     }
 
+    public JTextField getQuantityTextField() {
+        return quantityTextField;
+    }
+
     public void setSearchButtonActionListener(ActionListener al) {
         searchButton.addActionListener(al);
     }
@@ -59,8 +67,8 @@ public class MarketTab extends View {
         createTabHeader.setText(welcomeMessage + "\nERROR: Stock not purchased.");
     }
 
-    public void printSuccessfulPurchase(String confirmedTicker) {
-        createTabHeader.setText(welcomeMessage + "\nPurchased 1 share of " + confirmedTicker);
+    public void printSuccessfulPurchase(String confirmedTicker, String qty) {
+        createTabHeader.setText(welcomeMessage + "\nPurchased " + qty + " share/s of " + confirmedTicker);
     }
 
     public void printStockData(String ticker, double price) {
@@ -68,6 +76,5 @@ public class MarketTab extends View {
     }
 
     public void viewController() {}
-
 
 }

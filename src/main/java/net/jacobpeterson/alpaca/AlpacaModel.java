@@ -8,7 +8,6 @@ import net.jacobpeterson.alpaca.openapi.marketdata.model.StockTrade;
 import net.jacobpeterson.alpaca.openapi.trader.ApiException;
 import net.jacobpeterson.alpaca.openapi.trader.model.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,12 +37,12 @@ public class AlpacaModel {
         alpacaAPI = null;
     }
 
-    public String buyShare(String ticker) throws ApiException {
+    public String buyShare(String ticker, String qty) throws ApiException {
 
         final Order openingOrder = alpacaAPI.trader().orders()
                 .postOrder(new PostOrderRequest()
                         .symbol(ticker)
-                        .qty("1")
+                        .qty(qty)
                         .side(OrderSide.BUY)
                         .type(OrderType.MARKET)
                         .timeInForce(TimeInForce.GTC));
@@ -64,12 +63,12 @@ public class AlpacaModel {
 
     }
 
-    public String sellShare(String ticker) throws ApiException {
+    public String sellShare(String ticker, String qty) throws ApiException {
 
         final Order closingOrder = alpacaAPI.trader().orders()
                 .postOrder(new PostOrderRequest()
                         .symbol(ticker)
-                        .qty("1")
+                        .qty(qty)
                         .side(OrderSide.SELL)
                         .type(OrderType.MARKET)
                         .timeInForce(TimeInForce.GTC));

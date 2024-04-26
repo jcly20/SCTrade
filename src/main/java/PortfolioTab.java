@@ -7,10 +7,12 @@ import java.util.UUID;
 public class PortfolioTab extends View {
 
     JTextArea createTabHeader;
+    JTextArea confirmationFooter;
     JPanel portfolioJPanel;
     JButton sellButton;
-    String welcomeMessage = ("Welcome to your SCTrade Portfolio \n" +
-            "Symbol - Quantity - Price - P/L -- Cash in Account: 111");
+    private JTextField quantityTextField;
+    String welcomeMessage = ("Welcome to your SCTrade Portfolio\n" +
+            "Symbol - Quantity - Price - P/L -- Cash: NoAccount");
 
     public JPanel makeTab() {
 
@@ -18,8 +20,7 @@ public class PortfolioTab extends View {
         jPanel.setLayout(new BorderLayout());
 
         portfolioJPanel = new JPanel();
-        portfolioJPanel.setBackground(Color.BLACK);
-        portfolioJPanel.setLayout(new GridLayout(3, 2));
+        portfolioJPanel.setLayout(new GridLayout(6, 2));
 
         createTabHeader = new JTextArea(welcomeMessage);
         createTabHeader.setPreferredSize(new Dimension(50, 75));
@@ -30,10 +31,16 @@ public class PortfolioTab extends View {
         listModel = new DefaultListModel<String>();
         jList = new JList<String>(listModel);
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jPanel.add(jList, BorderLayout.CENTER);
+        portfolioJPanel.add(jList, BorderLayout.CENTER);
+
+        quantityTextField = new JTextField(40);
+        portfolioJPanel.add(new JLabel("quantity:"));
+        portfolioJPanel.add(quantityTextField);
 
         sellButton = new JButton("Sell Share");
-        jPanel.add(sellButton, BorderLayout.SOUTH);
+        portfolioJPanel.add(sellButton, BorderLayout.SOUTH);
+
+        jPanel.add(portfolioJPanel, BorderLayout.CENTER);
 
         return jPanel;
 
@@ -43,13 +50,19 @@ public class PortfolioTab extends View {
 
     public void setSellButtonActionListener(ActionListener al) { sellButton.addActionListener(al); }
 
+    public JTextField getQuantityTextField() {
+        return quantityTextField;
+    }
+
     public void printSellError() {
         createTabHeader.setText(welcomeMessage + "\nERROR: Stock not Sold.");
     }
 
-    public void printSuccessfulSell(String confirmedTicker) {
-        createTabHeader.setText(welcomeMessage + "\nSold 1 share of " + confirmedTicker);
-    }
+//    public void printSuccessfulSell(String confirmedTicker, String qty) {
+//        String header = welcomeMessage.substring(0, welcomeMessage.lastIndexOf(" "));
+//        createTabHeader.setText(header + " " + cash);
+//        confirmationFooter.setText("Sold " + qty + " share of " + confirmedTicker);
+//    }
 
     public void viewController() {}
 
