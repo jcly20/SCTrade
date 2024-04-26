@@ -81,23 +81,6 @@ public class AlpacaModel {
 
     public ArrayList<String> getPositions() throws ApiException {
 
-//        ArrayList<ArrayList<String>> positionModel = new ArrayList<>();
-//        final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();
-//        System.out.println("positions \n" + positions);
-//        for (Position position : positions) {
-//            ArrayList<String> positionData = new ArrayList<>();
-//            positionData.add(position.getSymbol());
-//            positionData.add(position.getQty());
-//            positionData.add(position.getCurrentPrice());
-//            String profit = String.format("%.2f", Double.parseDouble(position.getMarketValue()) - Double.parseDouble(position.getCostBasis()));
-//            positionData.add(profit);
-//            positionModel.add(positionData);
-//        }
-
-//        for (int i=0; i<positionModel.getSize(); i++) {
-//            System.out.println("position: " + positionModel.getElementAt(i));
-//        }
-
         ArrayList<String> positionList = new ArrayList<>();
 
         final List<Position> positions = alpacaAPI.trader().positions().getAllOpenPositions();

@@ -7,10 +7,12 @@ public class MarketTab extends View {
 
     private JTextField tickerTextField;
     private JTextArea createTabHeader;
+    private JTextArea dataFooter;
     private JButton searchButton;
     private JButton buyButton;
     JPanel marketJPanel;
     String welcomeMessage = ("Welcome to SCTrade Market Watch");
+
 
     public JPanel makeTab() {
 
@@ -22,11 +24,16 @@ public class MarketTab extends View {
         marketJPanel.setLayout(new GridLayout(3, 2));
         
         createTabHeader = new JTextArea(welcomeMessage);
-
         createTabHeader.setPreferredSize(new Dimension(50, 50));
-        createTabHeader.setFont(new Font("Arial", 20, 18));
+        createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
+
+        dataFooter = new JTextArea("");
+        createTabHeader.setPreferredSize(new Dimension(50, 50));
+        createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
+        createTabHeader.setAlignmentX(SwingConstants.CENTER);
+        jPanel.add(createTabHeader, BorderLayout.SOUTH);
 
         tickerTextField = new JTextField(40);
         marketJPanel.add(new JLabel("symbol:"));
@@ -63,8 +70,8 @@ public class MarketTab extends View {
         createTabHeader.setText(welcomeMessage + "\nPurchased 1 share of " + confirmedTicker);
     }
 
-    public void printStockData(double price) {
-        createTabHeader.setText(welcomeMessage + "\nPrice of stock:  " + price);
+    public void printStockData(String ticker, double price) {
+        dataFooter.setText(ticker + " current price:  " + price);
     }
 
     public void viewController() {}
