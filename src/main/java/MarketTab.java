@@ -7,7 +7,6 @@ public class MarketTab extends View {
 
     private JTextField tickerTextField;
     private JTextArea createTabHeader;
-    private JTextArea dataFooter;
     private JButton searchButton;
     private JButton buyButton;
     JPanel marketJPanel;
@@ -28,12 +27,6 @@ public class MarketTab extends View {
         createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
         createTabHeader.setAlignmentX(SwingConstants.CENTER);
         jPanel.add(createTabHeader, BorderLayout.NORTH);
-
-        dataFooter = new JTextArea("");
-        createTabHeader.setPreferredSize(new Dimension(50, 50));
-        createTabHeader.setFont(new Font("Arial", Font.PLAIN, 18));
-        createTabHeader.setAlignmentX(SwingConstants.CENTER);
-        jPanel.add(createTabHeader, BorderLayout.SOUTH);
 
         tickerTextField = new JTextField(40);
         marketJPanel.add(new JLabel("symbol:"));
@@ -71,7 +64,7 @@ public class MarketTab extends View {
     }
 
     public void printStockData(String ticker, double price) {
-        dataFooter.setText(ticker + " current price:  " + price);
+        createTabHeader.setText(welcomeMessage + "\n" + ticker + " current price:  " + price);
     }
 
     public void viewController() {}
