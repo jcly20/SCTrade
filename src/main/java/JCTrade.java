@@ -1,13 +1,11 @@
 
 import net.jacobpeterson.alpaca.AlpacaModel;
 import net.jacobpeterson.alpaca.openapi.trader.ApiException;
-import net.jacobpeterson.alpaca.openapi.trader.model.*;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.PackedColorModel;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.lang.Thread;
@@ -66,7 +64,6 @@ public class JCTrade {
 
             try {
                 String confirmedTicker = alpacaModel.sellShare(ticker, qty);
-                //viewController.portfolioTab.printSuccessfulSell(confirmedTicker, qty);
                 System.out.println(confirmedTicker + " sold!");
             } catch(ApiException a){
                 viewController.portfolioTab.printSellError();

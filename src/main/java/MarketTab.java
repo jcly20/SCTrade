@@ -130,6 +130,4 @@ public class MarketTab extends View {
 
     }
 
-    public void viewController() {}
-
 }

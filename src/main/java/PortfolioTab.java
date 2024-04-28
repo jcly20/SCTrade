@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class PortfolioTab extends View {
 
@@ -57,13 +56,5 @@ public class PortfolioTab extends View {
     public void printSellError() {
         createTabHeader.setText(welcomeMessage + "\nERROR: Stock not Sold.");
     }
-
-//    public void printSuccessfulSell(String confirmedTicker, String qty) {
-//        String header = welcomeMessage.substring(0, welcomeMessage.lastIndexOf(" "));
-//        createTabHeader.setText(header + " " + cash);
-//        confirmationFooter.setText("Sold " + qty + " share of " + confirmedTicker);
-//    }
-
-    public void viewController() {}
 
 }

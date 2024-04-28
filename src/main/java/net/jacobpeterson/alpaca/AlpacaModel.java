@@ -22,8 +22,6 @@ public class AlpacaModel {
     }
 
     public void createConnection(String keyID, String secretKey) throws ApiException {
-//        keyID = "PKBIBI0HHEZKJ9GQXPKI";
-//        secretKey = "SqKPm3Q1SbZqjGKuN5FvGR1VrVxtBpAd8EtNGcu7";
         final TraderAPIEndpointType endpointType = TraderAPIEndpointType.PAPER; // or 'LIVE'
         final MarketDataWebsocketSourceType sourceType = MarketDataWebsocketSourceType.IEX; // or 'SIP'
         alpacaAPI = new AlpacaAPI(keyID, secretKey, endpointType, sourceType);
@@ -134,9 +132,7 @@ public class AlpacaModel {
     }
 
     public String getAccountCash() throws ApiException {
-
         final Account account = alpacaAPI.trader().accounts().getAccount();
-
         return account.getCash();
     }
 

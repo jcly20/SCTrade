@@ -85,7 +85,5 @@ public class AuthenticateTab extends View  {
         createTabHeader.setText(welcomeMessage);
     }
 
-    public void viewController() {}
-
 }
 
