@@ -15,7 +15,7 @@ import java.util.*;
 
 public class AlpacaModel {
 
-    private AlpacaAPI alpacaAPI;
+    public AlpacaAPI alpacaAPI;
 
     public AlpacaModel(){
         alpacaAPI = null;
@@ -64,7 +64,7 @@ public class AlpacaModel {
 
     }
 
-    public ArrayList<Double> getChart(String ticker) throws net.jacobpeterson.alpaca.openapi.marketdata.ApiException {
+    public ArrayList<ArrayList<Double>> getChart(String ticker) throws net.jacobpeterson.alpaca.openapi.marketdata.ApiException {
 
         String timeframe = "1Day";
         OffsetDateTime end = OffsetDateTime.now().plusMinutes(-15);
@@ -73,14 +73,30 @@ public class AlpacaModel {
         StockBarsResp stockBar = alpacaAPI.marketData().stock().stockBars(ticker, timeframe, start, end, null, null, null, null, null, null, null);
         Map<String, List<StockBar>> bars = stockBar.getBars();
 
+        ArrayList<ArrayList<Double>> priceData = new ArrayList<>();
+        ArrayList<Double> openPrice = new ArrayList<>();
+        ArrayList<Double> highPrice = new ArrayList<>();
+        ArrayList<Double> lowPrice = new ArrayList<>();
         ArrayList<Double> closePrice = new ArrayList<>();
+        ArrayList<Double> dates = new ArrayList<>();
 
         for (Map.Entry<String, List<StockBar>> entry : bars.entrySet())
             for(StockBar bar : entry.getValue()) {
+                openPrice.add(bar.getO());
+                highPrice.add(bar.getH());
+                lowPrice.add(bar.getL());
                 closePrice.add(bar.getC());
+                dates.add((double) bar.getT().toEpochSecond());
+
             }
 
-        return closePrice;
+        priceData.add(openPrice);
+        priceData.add(highPrice);
+        priceData.add(lowPrice);
+        priceData.add(closePrice);
+        priceData.add(dates);
+
+        return priceData;
 
     }
 

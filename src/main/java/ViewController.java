@@ -1,3 +1,5 @@
+import net.jacobpeterson.alpaca.AlpacaModel;
+
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -20,6 +22,10 @@ public class ViewController extends View {
         jTabs.add("MARKET", marketTab.makeTab());
         jTabs.add("PORTFOLIO", portfolioTab.makeTab());
 
+        jTabs.setEnabledAt(0, true);
+        jTabs.setEnabledAt(1, false);
+        jTabs.setEnabledAt(2, false);
+
         jFrame.add(jTabs);
         jFrame.getContentPane().setBackground(Color.BLACK);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +35,7 @@ public class ViewController extends View {
     }
 
     public void setChangeTabChangeLister(ChangeListener cl) {
-        jTabs.addChangeListener(cl);
+            jTabs.addChangeListener(cl);
     }
 
     public JPanel makeTab() {return jPanel;}

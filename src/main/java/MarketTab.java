@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import org.knowm.xchart.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 public class MarketTab extends View {
@@ -78,7 +79,19 @@ public class MarketTab extends View {
         createTabHeader.setText(welcomeMessage + "\n" + ticker + " current price:  " + price);
     }
 
-    public void displayChart(ArrayList<Double> closePrice) {
+    public void displayChart(String ticker, ArrayList<ArrayList<Double>> priceData) {
+
+        ArrayList<Double> openPrice = priceData.get(0);
+        ArrayList<Double> highPrice = priceData.get(1);
+        ArrayList<Double> lowPrice = priceData.get(2);
+        ArrayList<Double> closePrice = priceData.get(3);
+        ArrayList<Double> dates = priceData.get(4);
+
+        ArrayList<Double> openPriceMO = new ArrayList<>();
+        ArrayList<Double> highPriceMO = new ArrayList<>();
+        ArrayList<Double> lowPriceMO = new ArrayList<>();
+        ArrayList<Double> closePriceMO = new ArrayList<>();
+        ArrayList<Double> datesMO = new ArrayList<>();
 
         double[] closeArr = new double[closePrice.size()];
         double[] barIndex = new double[closePrice.size()];
@@ -87,13 +100,33 @@ public class MarketTab extends View {
             closeArr[i] = closePrice.get(i);
         }
 
+        for (int i=0; i<30; i++) {
+            openPriceMO.add(openPrice.get(i));
+            highPriceMO.add(highPrice.get(i));
+            lowPriceMO.add(lowPrice.get(i));
+            closePriceMO.add(closePrice.get(i));
+            datesMO.add(dates.get(i)); //new Date(String.valueOf(
+        }
 
-        XYChart chart = QuickChart.getChart("TSLA", null, null, null, barIndex, closeArr);
+        XYChart chart = QuickChart.getChart(ticker, null, null, null, barIndex, closeArr);
         chart.getStyler().setCursorEnabled(true);
         chart.getStyler().setZoomEnabled(true);
 
-        JPanel chartPanel = new XChartPanel<XYChart>(chart);
-        marketJPanel.add(chartPanel);
+        OHLCChart candleChart = new OHLCChartBuilder().width(800).height(600).title(ticker).build();
+        candleChart.addSeries(ticker, datesMO, openPriceMO, highPriceMO, lowPriceMO, closePriceMO);
+
+        JPanel lineChartPanel = new XChartPanel<XYChart>(chart);
+        JPanel candleChartPanel = new XChartPanel<OHLCChart>(candleChart);
+        JLabel label = new JLabel("3yr Line Above -- 1mo Candle Below", SwingConstants.CENTER);
+
+        JFrame chartFrame = new JFrame(ticker + " Chart");
+        chartFrame.setLayout(new BorderLayout());
+        chartFrame.add(lineChartPanel, BorderLayout.NORTH);
+        chartFrame.add(candleChartPanel, BorderLayout.CENTER);
+        chartFrame.add(label, BorderLayout.SOUTH);
+        chartFrame.setSize(1000,600);
+        chartFrame.pack();
+        chartFrame.setVisible(true);
 
     }
 

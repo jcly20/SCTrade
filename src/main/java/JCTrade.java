@@ -32,6 +32,7 @@ public class JCTrade {
                 positions = alpacaModel.getPositions();
                 cash = alpacaModel.getAccountCash();
             } catch (ApiException a) {
+                System.out.println("Cannot Access Page: Not Logged In");
                 a.printStackTrace();
             }
 
@@ -118,6 +119,8 @@ public class JCTrade {
                 alpacaModel.createConnection(keyID, secretKey);
                 UUID uuid = alpacaModel.getUUID();
                 viewController.authenticateTab.printSuccessfulLogin(uuid);
+                viewController.jTabs.setEnabledAt(1, true);
+                viewController.jTabs.setEnabledAt(2, true);
             } catch(ApiException e){
                 viewController.authenticateTab.printInvalidKeysError();
                 System.out.println("ERROR: Invalid keys!");
@@ -138,11 +141,10 @@ public class JCTrade {
                 double price = alpacaModel.searchShare(ticker);
                 viewController.marketTab.printStockData(ticker, price);
 
-                ArrayList<Double> closePrice = new ArrayList<>();
-                closePrice = alpacaModel.getChart(ticker);
+                ArrayList<ArrayList<Double>> priceData = new ArrayList<>();
+                priceData = alpacaModel.getChart(ticker);
 
-                viewController.marketTab.displayChart(closePrice);
-
+                viewController.marketTab.displayChart(ticker, priceData);
 
                 System.out.println("stock searched!");
             } catch(net.jacobpeterson.alpaca.openapi.marketdata.ApiException e){
