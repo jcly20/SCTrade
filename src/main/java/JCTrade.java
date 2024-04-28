@@ -135,6 +135,10 @@ public class JCTrade {
             try {
                 double price = alpacaModel.searchShare(ticker);
                 viewController.marketTab.printStockData(ticker, price);
+
+
+
+
                 System.out.println("stock searched!");
             } catch(net.jacobpeterson.alpaca.openapi.marketdata.ApiException e){
                 viewController.marketTab.printPurchaseError();
