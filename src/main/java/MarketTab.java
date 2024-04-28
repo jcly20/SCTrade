@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import org.knowm.xchart.*;
 import java.util.UUID;
 
 public class MarketTab extends View {

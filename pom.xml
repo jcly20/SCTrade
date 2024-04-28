@@ -32,6 +32,11 @@
     </scm>
     <dependencies>
         <dependency>
+            <groupId>org.knowm.xchart</groupId>
+            <artifactId>xchart</artifactId>
+            <version>3.8.7</version>
+        </dependency>
+        <dependency>
             <groupId>net.jacobpeterson.alpaca</groupId>
             <artifactId>alpaca-java</artifactId>
             <version>10.0.1</version>
