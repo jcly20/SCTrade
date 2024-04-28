@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import org.knowm.xchart.*;
+
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class MarketTab extends View {
@@ -74,6 +76,25 @@ public class MarketTab extends View {
 
     public void printStockData(String ticker, double price) {
         createTabHeader.setText(welcomeMessage + "\n" + ticker + " current price:  " + price);
+    }
+
+    public void displayChart(ArrayList<Double> closePrice) {
+
+        double[] closeArr = new double[closePrice.size()];
+        double[] barIndex = new double[closePrice.size()];
+        for(int i=0; i<closePrice.size(); i++) {
+            barIndex[i] = i;
+            closeArr[i] = closePrice.get(i);
+        }
+
+
+        XYChart chart = QuickChart.getChart("TSLA", null, null, null, barIndex, closeArr);
+        chart.getStyler().setCursorEnabled(true);
+        chart.getStyler().setZoomEnabled(true);
+
+        JPanel chartPanel = new XChartPanel<XYChart>(chart);
+        marketJPanel.add(chartPanel);
+
     }
 
     public void viewController() {}

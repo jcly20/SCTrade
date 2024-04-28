@@ -138,7 +138,10 @@ public class JCTrade {
                 double price = alpacaModel.searchShare(ticker);
                 viewController.marketTab.printStockData(ticker, price);
 
+                ArrayList<Double> closePrice = new ArrayList<>();
+                closePrice = alpacaModel.getChart(ticker);
 
+                viewController.marketTab.displayChart(closePrice);
 
 
                 System.out.println("stock searched!");

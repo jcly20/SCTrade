@@ -3,14 +3,15 @@ package net.jacobpeterson.alpaca;
 
 import net.jacobpeterson.alpaca.model.util.apitype.MarketDataWebsocketSourceType;
 import net.jacobpeterson.alpaca.model.util.apitype.TraderAPIEndpointType;
+import net.jacobpeterson.alpaca.openapi.marketdata.model.StockBar;
+import net.jacobpeterson.alpaca.openapi.marketdata.model.StockBarsResp;
 import net.jacobpeterson.alpaca.openapi.marketdata.model.StockFeed;
 import net.jacobpeterson.alpaca.openapi.marketdata.model.StockTrade;
 import net.jacobpeterson.alpaca.openapi.trader.ApiException;
 import net.jacobpeterson.alpaca.openapi.trader.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.time.OffsetDateTime;
+import java.util.*;
 
 public class AlpacaModel {
 
@@ -60,6 +61,26 @@ public class AlpacaModel {
                 latestTrade.getP(), latestTrade.getS());
 
         return latestTrade.getP();
+
+    }
+
+    public ArrayList<Double> getChart(String ticker) throws net.jacobpeterson.alpaca.openapi.marketdata.ApiException {
+
+        String timeframe = "1Day";
+        OffsetDateTime end = OffsetDateTime.now().plusMinutes(-15);
+        OffsetDateTime start = end.plusYears(-3);
+
+        StockBarsResp stockBar = alpacaAPI.marketData().stock().stockBars(ticker, timeframe, start, end, null, null, null, null, null, null, null);
+        Map<String, List<StockBar>> bars = stockBar.getBars();
+
+        ArrayList<Double> closePrice = new ArrayList<>();
+
+        for (Map.Entry<String, List<StockBar>> entry : bars.entrySet())
+            for(StockBar bar : entry.getValue()) {
+                closePrice.add(bar.getC());
+            }
+
+        return closePrice;
 
     }
 
