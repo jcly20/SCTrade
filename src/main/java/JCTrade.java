@@ -102,6 +102,8 @@ public class JCTrade {
         public void actionPerformed(ActionEvent e) {
             alpacaModel.logout();
             viewController.authenticateTab.logout();
+            viewController.jTabs.setEnabledAt(1, false);
+            viewController.jTabs.setEnabledAt(2, false);
         }
     }
 
